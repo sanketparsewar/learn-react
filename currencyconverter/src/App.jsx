@@ -26,7 +26,7 @@ function App() {
     <>
       <div className="flex items-center w-screen h-screen  justify-center bg-gray-100 ">
         <div className="flex flex-col items-center gap-2 p-6 rounded-3xl shadow-2xl shadow-black-900 ">
-          <h1 className="text-2xl font-bold ">Currency Converter</h1>
+          <h1 className=" uppercase text-2xl font-bold  text-orange-900">Currency Converter</h1>
 
           <form
             onSubmit={(e) => {
@@ -81,9 +81,9 @@ function App() {
             <div>
               <button
                 type="submit"
-                className=" cursor-pointer active:bg-blue-500 bg-blue-300 px-6 py-1 rounded-md"
+                className="font-bold cursor-pointer active:bg-blue-500 bg-blue-300 px-6 py-1 rounded-md"
               >
-                Convert
+                Convert {from.toUpperCase()} to {to.toUpperCase()}
               </button>
             </div>
           </form>
