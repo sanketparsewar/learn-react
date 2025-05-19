@@ -14,7 +14,7 @@ function InputBox({
 
   return (
     <div className="">
-      <label htmlFor={amountInputId} className="mx-2 text-slate-400">
+      <label htmlhtmlFor={amountInputId} className="mx-2 text-slate-400">
         {label}:
       </label>
       <div>

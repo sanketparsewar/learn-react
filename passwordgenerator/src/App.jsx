@@ -1,4 +1,4 @@
-import { useState, useCallback,  useEffect,useRef } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 
 function App() {
   const [password, setPassword] = useState("");
@@ -7,7 +7,7 @@ function App() {
   const [characters, setCharacters] = useState(false);
 
   // creating the refrence of password field
-  const passwordRef= useRef(password)
+  const passwordRef = useRef(password);
 
   const isNumber = () => {
     setNumber(!number);
@@ -26,13 +26,12 @@ function App() {
       pass += str.charAt(char);
     }
     setPassword(pass);
-  }, [length, number, characters,setPassword]);
+  }, [length, number, characters, setPassword]);
 
-
-  const copyPassword=useCallback(()=>{
-    passwordRef.current?.select()   //this will select the password (highlight the text to blue)
-    window.navigator.clipboard.writeText(password)
-  },[password])
+  const copyPassword = useCallback(() => {
+    passwordRef.current?.select(); //this will select the password (highlight the text to blue)
+    window.navigator.clipboard.writeText(password);
+  }, [password]);
 
   // run after render, if any one of the given dependency gets change then the useEffect gets run
   // we cannot give password as dependency because generatePassword() function get call and we get
@@ -54,8 +53,11 @@ function App() {
               readOnly
               className="border-1 px-2 py-1 focus:outline-0 rounded-2xl"
             />
-           
-            <button onClick={copyPassword} className="cursor-pointer active:bg-blue-400 mx-1 px-2 py-1 bg-amber-300 border rounded-2xl">
+
+            <button
+              onClick={copyPassword}
+              className="cursor-pointer active:bg-blue-400 mx-1 px-2 py-1 bg-amber-300 border rounded-2xl"
+            >
               Copy
             </button>
           </div>
@@ -69,7 +71,7 @@ function App() {
                 value={length}
                 className="cursor-pointer"
               />
-              <label htmlFor="length">
+              <label htmlhtmlFor="length">
                 <span className="text-blue-800 ">({length})</span> Length{" "}
               </label>
             </div>
@@ -81,7 +83,7 @@ function App() {
                 checked={number}
                 className="cursor-pointer"
               />
-              <label htmlFor="number" className="cursor-pointer">
+              <label htmlhtmlFor="number" className="cursor-pointer">
                 Number{" "}
               </label>
             </div>
@@ -93,7 +95,7 @@ function App() {
                 id="characters"
                 className="cursor-pointer"
               />
-              <label htmlFor="characters" className="cursor-pointer">
+              <label htmlhtmlFor="characters" className="cursor-pointer">
                 Characters
               </label>
             </div>
