@@ -30,7 +30,7 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center md:min-h-screen lg:min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-4 bg-white rounded shadow-md">
         <h2 className="text-2xl font-bold text-center text-gray-800">
           Sign Up
@@ -63,7 +63,7 @@ function Signup() {
               },
             })}
           />
-          <Button type="submit" >Sign Up</Button>
+          <Button type="submit">Sign Up</Button>
         </form>
         <p className="text-sm text-center text-gray-600">
           Already have an account?{" "}
