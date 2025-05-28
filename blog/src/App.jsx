@@ -4,12 +4,13 @@ import authService from "./appwrite/auth";
 import { login, logout } from "./store/authSlice";
 import "./App.css";
 import { Footer, Header } from "./components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import ScrollToTop from "./components/Scroller";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-
+  
   useEffect(() => {
     authService
       .getCurrentuser()
@@ -30,17 +31,18 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  return loading ? (<div>Loading...</div>) : (<div>
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <div>
-      <Header/>
-      <Outlet />
-      <Footer/>
+      <div>
+        <ScrollToTop/>
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
     </div>
-  </div>);
+  );
 }
 
 export default App;
-
-
-
-

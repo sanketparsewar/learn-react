@@ -24,7 +24,7 @@ function Home() {
       </div>
     </Container>
   ) : posts.length === 0 ? (
-    <Container className="min-h-screen flex flex-col items-center justify-center">
+    <Container className=" flex flex-col items-center justify-center">
       <h2 className="text-2xl font-semibold text-gray-600 mb-4 text-center">
         No posts available!
       </h2>
@@ -36,7 +36,7 @@ function Home() {
       </button>
     </Container>
   ) : (
-    <Container className="min-h-screen">
+    <Container>
       <div className="mb-5">
         <img
           src="https://zomatoblog.com/wp-content/uploads/2025/04/1.png"
@@ -54,7 +54,7 @@ function Home() {
       <div className="text-center">
         <button
           onClick={() => navigate("/all-posts")}
-          className="px-4 py-2 text-blue-500 hover:text-blue-800 cursor-pointer "
+          className="px-4 mt-5 py-2 text-blue-500 hover:text-blue-800 cursor-pointer "
         >
           View more ...
         </button>

@@ -86,7 +86,7 @@ function PostForm({ post }) {
         </div>
         <div>
           <Input
-            label="Slug"
+            label="Slug" readOnly
             {...register("slug", { required: true })}
             placeholder="Generated slug"
             onInput={(e) => {
