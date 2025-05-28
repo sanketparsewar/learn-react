@@ -9,7 +9,7 @@ function EditPost() {
   const navigate = useNavigate();
   useEffect(() => {
     if (slug) {
-      service.getPostBySlug(slug).then((post) => {
+      service.getPost(slug).then((post) => {
         if (post) {
           setPost(post);
         }
@@ -20,11 +20,17 @@ function EditPost() {
   }, [slug, navigate]);
   return post ? (
     <div>
-      <Container>
+      <Container className="min-h-screen">
         <PostForm post={post} />
       </Container>
     </div>
-  ) : null;
+  ) : (
+    <Container className="min-h-screen flex items-center justify-center">
+      <div className="text-xl font-semibold text-gray-600 animate-pulse">
+        Loading...
+      </div>
+    </Container>
+  );
 }
 
 export default EditPost;

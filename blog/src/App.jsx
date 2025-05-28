@@ -33,7 +33,7 @@ function App() {
   return loading ? (<div>Loading...</div>) : (<div>
     <div>
       <Header/>
-      <Outlet/>
+      <Outlet />
       <Footer/>
     </div>
   </div>);

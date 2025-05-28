@@ -40,6 +40,7 @@ export default function RTE({ name, control, label, defaultValue = "" }) {
                 "code", // (if you intend for this to be the source code view plugin)
                 "help",
                 "wordcount",
+                
               ],
               toolbar:
                 "undo redo | styleselect | bold italic backcolor | \

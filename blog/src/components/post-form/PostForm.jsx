@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, Select, RTE } from "../index";
 import service from "../../appwrite/config";
@@ -20,8 +20,6 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
-    console.log("data", data);
-
     if (post) {
       const file = data.image[0] ? service.uploadFile(data.image[0]) : null;
       if (file) {
@@ -59,6 +57,11 @@ function PostForm({ post }) {
   });
 
   useEffect(() => {
+    if (post)
+      setValue("slug", slugTransform(post.$id, { shouldValidate: true }));
+  }, []);
+
+  useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === "title") {
         setValue("slug", slugTransform(value.title, { shouldValidate: true }));
@@ -68,75 +71,80 @@ function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <div className="flex gap-5 p-5 bg-gray-100 rounded-lg">
-      <form
-        onSubmit={handleSubmit(submit)}
-        className="flex gap-5 flex-1 bg-white p-5 rounded-lg shadow-md"
-      >
-        <div className="flex-2 flex flex-col gap-5">
-          <div>
-            <Input
-              label="Title"
-              {...register("title", { required: true })}
-              placeholder="Enter post title"
-            />
-          </div>
-          <div>
-            <Input
-              label="Slug"
-              {...register("slug", { required: true })}
-              placeholder="Generated slug"
-              onInput={(e) => {
-                setValue("slug", slugTransform(e.currentTarget.value), {
-                  shouldValidate: true,
-                });
-              }}
-            />
-          </div>
-          <div>
-            <RTE
-              label="Content"
-              control={control}
-              name="content"
-              defaultValue={getValues("content")}
-              placeholder="Write your post content here..."
-              className="min-h-[200px] border border-gray-300 rounded-md p-2"
-            />
-          </div>
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="flex flex-col md:flex-row gap-4 p-5 bg-white shadow-md rounded-lg"
+    >
+      <div className="flex flex-col gap-5 flex-2">
+        <div>
+          <Input
+            label="Title"
+            {...register("title", { required: true })}
+            placeholder="Enter post title"
+            className="w-full"
+          />
         </div>
-        <div className="flex flex-col gap-5">
-          <div>
-            <Input
-              label="Featured Image"
-              type="file"
-              {...register("image", { required: !post })} // required if post is not provided
-              accept="image/*"
-              className="w-full"
-            />
-            {post && (
-              <div className="mt-2 text-center">
-                <img
-                  src={service.getFilePreview(post.featuredImage)}
-                  alt="Featured"
-                  className="w-full h-auto rounded-md border border-gray-300"
-                />
-              </div>
-            )}
-          </div>
-          <div>
-            <Select
-              options={["active", "inactive"]}
-              label="Status"
-              defaultValue={post ? post.status : "active"}
-              {...register("status", { required: true })}
-            />
-          </div>
-          <Button type="submit" bgColor={post ? "bg-green-500" : undefined}>
-            {post ? "Update" : "Submit"}
-          </Button>
+        <div>
+          <Input
+            label="Slug"
+            {...register("slug", { required: true })}
+            placeholder="Generated slug"
+            onInput={(e) => {
+              setValue("slug", slugTransform(e.currentTarget.value), {
+                shouldValidate: true,
+              });
+            }}
+            className="w-full"
+          />
         </div>
-      </form>
-    </div>
+        <div>
+          <RTE
+            label="Content"
+            control={control}
+            name="content"
+            defaultValue={getValues("content")}
+            placeholder="Write your post content here..."
+            className="min-h-[200px] border border-gray-300 rounded-md p-2"
+          />
+        </div>
+      </div>
+      <div className="flex flex-col gap-5 flex-1">
+        <div>
+          <Input
+            label="Featured Image"
+            type="file"
+            {...register("image", { required: !post })} // required if post is not provided
+            accept="image/*"
+            className="w-full"
+          />
+          {post && (
+            <div className="mt-2 text-center">
+              <img
+                src={service.getFilePreview(post.featuredImage)}
+                alt="Featured"
+                className="w-full max-w-xs h-auto rounded-md border border-gray-300 mx-auto"
+              />
+            </div>
+          )}
+        </div>
+        <div>
+          <Select
+            options={["active", "inactive"]}
+            label="Status"
+            defaultValue={post ? post.status : "active"}
+            {...register("status", { required: true })}
+            className="w-full"
+          />
+        </div>
+        <Button
+          type="submit"
+          bgColor={post ? "bg-green-500" : "bg-blue-500"}
+          className="w-full py-2 text-white rounded-md hover:opacity-90"
+        >
+          {post ? "Update" : "Submit"}
+        </Button>
+      </div>
+    </form>
   );
 }
 

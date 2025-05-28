@@ -17,6 +17,7 @@ import Post from "./pages/Post.jsx";
 import AllPosts from "./pages/AllPosts.jsx";
 import AddPost from "./pages/AddPost.jsx";
 import { RouterProvider } from "react-router-dom";
+import MyPosts from "./pages/MyPosts.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +56,14 @@ const router = createBrowserRouter(
             <AddPost />
           </AuthLayout>
         }
+      />
+      <Route
+      path="my-posts"
+      element={
+        <AuthLayout authentication>
+          <MyPosts/>
+        </AuthLayout>
+      }
       />
       <Route
         path="/edit-post/:slug"

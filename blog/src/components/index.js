@@ -12,9 +12,9 @@ import Signup from "./Signup";
 import Login from "./Login";
 import PostForm from "./post-form/PostForm";
 import PostCard from "./PostCard";
+import Pagination from "./Pagination";
 
 
-
-export {PostForm, Header, Footer, Container, Logo, LogoutBtn, Button, Input, Select, AuthLayout, RTE, Signup ,Login,PostCard};
+export {PostForm, Header, Footer, Container, Logo, LogoutBtn, Button, Input, Select, AuthLayout, RTE, Signup ,Login,PostCard,Pagination};
 
 

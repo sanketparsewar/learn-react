@@ -83,8 +83,15 @@ export class Service {
         }
     }
 
-    async getAllPosts(queries = [Query.equal('status', 'active')]) {
+    async getAllPosts({ isActive = null, userId = null, limit = null, offset = null, search = null, sort = 'Latest' }) {
         try {
+            const queries = []
+            if (isActive != null) queries.push(Query.equal('status', isActive ? "active" : "inactive"))
+            if (userId != null) queries.push(Query.equal('userId', userId))
+            if (limit != null) queries.push(Query.limit(limit))
+            if (offset != null) queries.push(Query.offset(offset));
+            if (search != null) queries.push(Query.contains('title', search))
+            queries.push(sort == 'Latest' ? Query.orderDesc('$createdAt') : Query.orderAsc('$createdAt'))
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
@@ -124,10 +131,11 @@ export class Service {
     }
 
     getFilePreview(fileId) {
-        return this.bucket.getFilePreview(
+        return this.bucket.getFileView(
             conf.appwriteBucketId,
             fileId
         )
+
     }
 
 }

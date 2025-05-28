@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-gray-800 text-white py-6">
+    <footer className="bg-gray-800 text-white py-6 mt-3">
       <div className="container mx-auto text-center">
         <p className="text-sm">
-          &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+          &copy; {new Date().getFullYear()} DailyDrift. All rights reserved.
         </p>
         <div className="mt-4 flex justify-center space-x-4">
           <Link className="text-gray-400 hover:text-white">Privacy Policy</Link>

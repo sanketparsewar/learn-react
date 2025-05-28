@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Container, PostCard, Pagination, Input, Select } from "../components";
+import { useSelector } from "react-redux";
 import service from "../appwrite/config";
-import { Container, PostCard, Input, Select, Pagination } from "../components";
 
-function AllPosts() {
+function MyPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState(null);
   const [sort, setSort] = useState("Latest");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const userData = useSelector((state) => state.auth.userData);
+
+  const limit = 8;
+  const offset = (page - 1) * limit;
 
   const getAllPostsService = () => {
     const limit = 8;
     const offset = (page - 1) * limit;
     setLoading(true);
     service
-      .getAllPosts({ isActive: true, limit, search, sort, offset })
+      .getAllPosts({ userId: userData.$id, limit, search, sort, offset })
       .then((posts) => {
         if (posts) {
           setTotalPages(Math.ceil(posts.total / limit));
@@ -37,7 +42,7 @@ function AllPosts() {
   return (
     <Container className="min-h-screen flex flex-col">
       <h1 className="text-3xl font-bold text-center mt-4 text-gray-800">
-        All Posts
+        My Posts
       </h1>
 
       <div className="px-4 flex flex-row gap-2 py-2">
@@ -104,4 +109,4 @@ function AllPosts() {
   );
 }
 
-export default AllPosts;
+export default MyPosts;
