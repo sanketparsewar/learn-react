@@ -39,6 +39,10 @@ function MyPosts() {
     getAllPostsService();
   }, [search, sort]);
 
+  const handleChangePage = (newPage) => {
+    setPage(newPage);
+  };
+
   return (
     <Container className="min-h-screen flex flex-col">
       <h1 className="text-3xl font-bold text-center mt-4 text-gray-800">
@@ -86,25 +90,11 @@ function MyPosts() {
           </div>
         )}
       </div>
-      <Pagination>
-        <button
-          onClick={() => setPage(page - 1)}
-          className="cursor-pointer hover:text-gray-800 pagination-button px-3"
-          disabled={page <= 1}
-        >
-          &#60; Previous
-        </button>
-        <span className="pagination-info">
-          Page <span className="text-blue-600">{page}</span> of {totalPages}
-        </span>
-        <button
-          onClick={() => setPage(page + 1)}
-          disabled={page === totalPages}
-          className="cursor-pointer hover:text-gray-800 pagination-button px-3"
-        >
-          <span>Next &#62;</span>
-        </button>
-      </Pagination>
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onPageChange={handleChangePage}
+      />
     </Container>
   );
 }

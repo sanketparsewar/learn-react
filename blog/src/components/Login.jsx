@@ -76,12 +76,6 @@ function Login() {
             Sign up
           </Link>
         </p>
-        {/* <p className="text-center text-sm text-gray-500 mt-2">
-          Forgot your password?{" "}
-          <Link to="/forgot-password" className="text-blue-500 hover:underline">
-            Reset it here
-          </Link>
-        </p> */}
       </div>
     </div>
   );
