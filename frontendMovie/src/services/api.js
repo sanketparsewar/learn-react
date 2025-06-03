@@ -1,4 +1,7 @@
 
+// VITE_APP_API_KEY="46601b59e2ef486b275fb309ef573c0d"
+// VITE_APP_BASE_URL="https://api.themoviedb.org/3"
+
 const api_key = import.meta.env.VITE_APP_API_KEY
 const base_url = import.meta.env.VITE_APP_BASE_URL
 const getPopularMovies = async () => {

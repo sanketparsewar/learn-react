@@ -7,34 +7,6 @@ function Home() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [searchedQuery, setSearchedQuery] = useState("");
-  //   useEffect(() => {
-  //     const loadMovies = async () => {
-  //       try {
-  //         const popularMovies = await getPopularMovies();
-  //         setMovies(popularMovies);
-  //       } catch (error) {
-  //         console.log(error);
-  //         setError(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  //     };
-  //   }, []);
-
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!searchedQuery.trim()) return;
-    setLoading(true);
-    try {
-      const searchedMovies = await searchMovie(searchedQuery);
-      setMovies(searchedMovies);
-      setError(null);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   useEffect(() => {
     if (searchedQuery)
@@ -42,6 +14,7 @@ function Home() {
         .then((res) => {
           setMovies(res);
         })
+        .catch((error) => setError(error))
         .finally(() => {
           setLoading(false);
         });
@@ -50,6 +23,7 @@ function Home() {
         .then((res) => {
           setMovies(res);
         })
+        .catch((error) => setError(error))
         .finally(() => {
           setLoading(false);
         });
@@ -60,7 +34,7 @@ function Home() {
       <h1 className="text-center text-3xl font-extrabold text-gray-900">
         Movie List
       </h1>
-      <form onSubmit={handleSearch} className="flex justify-center mb-6">
+      <form className="flex justify-center mb-6">
         <input
           placeholder="Search for a movie..."
           className="border border-gray-300 rounded-md px-4 py-2 w-80 "
